@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>商品列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- jquery -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" src="/jquery-validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/jquery-validation/localization/messages_zh.min.js"></script>
+    <!-- layer -->
+    <script type="text/javascript" src="/layer/layer.js"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" src="/js/md5.min.js"></script>
+    <!-- common.js -->
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+<body>
+
+<div class="panel panel-default">
+  <div class="panel-heading">秒杀商品列表</div>
+  <table class="table" id="goodslist">
+      <tr>
+         <!-- <td th:text="${user.nickname}"></td>-->
+      </tr>
+  	<tr><td>商品名称</td><td>秒杀价格</td><td>开始时间</td><td>结束时间</td><td>库存数量</td><td>详情</td></tr>
+                <!--<td th:text="${goods.goodsPrice}"></td>
+                <td th:text="${goods.miaoshaPrice}"></td>  
+                <td th:text="${goods.stockCount}"></td>
+                <td><a th:href="'/pages/goods_detail.htm?goodsId='+${goods.id}">详情</a></td>-->
+  </table>
+</div>
+</body>
+<script>
+    $(function(){
+        //countDown();
+        loadList();
+    });
+    function loadList() {
+        $.ajax({
+            url:"/goods/list/",
+            type:"GET",
+            success:function(data){
+                for(var i =0; i < data.length;i++){
+                    var temp = data[i];
+                    //前后端分离拼接字符串
+                    var innerline = "<tr><td>"+temp.goodsName+"</td>"+
+                            "<td>"+temp.snatchPrice+"</td>"+
+                        "<td>"+temp.startDate+"</td>"+
+                        "<td>"+temp.endDate+"</td>"+
+                        "<td>"+temp.snatchStock+"</td>"+
+                        "<td>"+"<a href=\"/pages/goods_detail.htm?goodsId="+temp.id+"\">详情</a>"+"</td>"+"</tr>";
+                    $("#goodslist").append(innerline);
+                    /*"<td>"+temp.goodsName+"<td/>" +
+                    "<td><img th:src=\""+temp.goodsImg+" width=\"100\" height=\"100\" /></td>"+
+                    "<tr/><tr>"*/
+                }
+            },
+            error:function(){
+            }
+        });
+    }
+</script>
+</html>
