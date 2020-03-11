@@ -9,10 +9,15 @@ emm，看着慕课网上有一个秒杀系统的课程，自己重新做了一�
 ## 系统设计
 
 秒杀业务实现流程图
+![优化之前](https://github.com/bottlebattle/SnatchGoodsSystem/blob/master/img/ProcessDigrambefore.png)
 
 
 
 优化流程图
+
+![秒杀业务流程](https://github.com/bottlebattle/SnatchGoodsSystem/blob/master/img/ProcessDigramAfter.png)；
+
+
 
 ## 系统实现
 
